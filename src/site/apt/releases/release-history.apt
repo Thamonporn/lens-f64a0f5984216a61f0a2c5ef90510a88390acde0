@@ -1,0 +1,202 @@
+~~
+~~ Licensed to the Apache Software Foundation (ASF) under one
+~~ or more contributor license agreements.  See the NOTICE file
+~~ distributed with this work for additional information
+~~ regarding copyright ownership.  The ASF licenses this file
+~~ to you under the Apache License, Version 2.0 (the
+~~ "License"); you may not use this file except in compliance
+~~ with the License.  You may obtain a copy of the License at
+~~
+~~   http://www.apache.org/licenses/LICENSE-2.0
+~~
+~~ Unless required by applicable law or agreed to in writing,
+~~ software distributed under the License is distributed on an
+~~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~~ KIND, either express or implied.  See the License for the
+~~ specific language governing permissions and limitations
+~~ under the License.
+~~
+All Apache Lens releases
+
+  Below table captures releases, release documentation, their compatibility and tools provided for incompatible changes.
+
+*--+--+---+--+--+--+--+
+|Release version|Major features|Release documentation|Release Notes|Download|Incompatibilities|More Info |
+*--+--+---+--+--+--+--+
+|2.7.0| Cube segmentation, Unioning data across facts, Support for source data completion checking, Added Retry feature for transient errors on query execution, Added an ability to analyze active sessions, Moving Lens to java8, Support for PreparedStatement in Lens JDBC client, Notifications on query completpletion, Limiting the max number of jobs scheduled per user, Support for creating the schema from CLI, Code cleanup and refactor, Doc/javadoc improvements, Bug fixes | {{{../versions/2.7.0/index.html} 2.7.x docs}} | {{{https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12315923&version=12336851} 2.7 release notes}} | {{{http://archive.apache.org/dist/lens/2.7.0/} Download}} | {{{#a2.7.x_from_2.6.x} 2.7.x-incompatibilities}} | - |
+*--+--+---+--+--+--+--+
+|2.6.1| GA release, Apache Hive 2 support, Query Scheduler, Lens UI enhancements, Python client, Streaming results, New regression module, Weighted Driver selector, Limit number of open sessions, Exponential back off for hive status updates, Single execution for duplicate queries, Auto kill queries on timeout, Convert dimension filter to fact filters for performance improvement, Code cleanup and refactor, Doc/javadoc improvements, Bug fixes| {{{../versions/2.6.1/index.html} 2.6.x docs}} |{{{https://issues.apache.org/jira/secure/ReleaseNote.jspa?version=12333846&styleName=&projectId=12315923} 2.6 release notes}} |{{{http://archive.apache.org/dist/lens/2.6.1/} Download}} |{{{#a2.6.x_from_2.5.x} 2.6.x-incompatibilities}} | - |
+*--+--+---+--+--+--+--+
+|2.5.0-beta| Support for multiple instances of a driver, REST API enhancements, Derived cube validation, Per-queue driver max launched queries constraint, New error codes for Hive and JDBC Driver, Lens CLI improvements, Query result retention policy, UI Enhancements, Code cleanup and refactor, Doc/javadoc improvements, Bug fixes| {{{../versions/2.5.0-beta/index.html} 2.5.x docs}} |{{{https://issues.apache.org/jira/secure/ReleaseNote.jspa?version=12333326&projectId=12315923} 2.5 release notes}} |{{{http://archive.apache.org/dist/lens/2.5-beta/} Download}} |{{{#a2.5.x_from_2.4.x} 2.5.x-incompatibilities}} | - |
+*--+--+---+--+--+--+--+
+|2.4.0-beta| JDK8 support, new web client, Saved Query and Parameterization, Support flattening of columns selected through bridge-tables(many-to-many relationships), column name mapping for columns in underlying storage tables, Enhancements cube.xsd and jdbc driver, Improvements in Error codes, Doc improvements, bug fixes| {{{../versions/2.4.0-beta/index.html} 2.4.x docs}} |{{{https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12315923&version=12333087} 2.4 release notes}} |{{{http://archive.apache.org/dist/lens/2.4-beta/} Download}} |{{{#a2.4.x_from_2.3.x} 2.4.x-incompatibilities}} | - |
+*--+--+---+--+--+--+--+
+|2.3.0-beta | Per Query Logs, Server side XML validation, File size in query result, File name suggestions in CLI, Phase 1 Query rewriter, Elastic Search driver, Query launching constraints, Update partition api, Lens Service Health check, Doc/javadoc improvements, Code cleanup, bug fixes| {{{../versions/2.3.0-beta/index.html} 2.3.x docs}} | {{{https://issues.apache.org/jira/secure/ReleaseNote.jspa?version=12332350&projectId=12315923} 2.3 release notes}}| {{{http://archive.apache.org/dist/lens/2.3-beta/} Download}} | {{{#a2.3.x_from_2.2.x} 2.3.x-incompatibilities}} | - |
+*--+--+---+--+--+--+--+
+|2.2.0-beta-incubating| CLI Improvements, Support for multiple expressions and and union queries, More descriptive error codes, Zeppelin integration, Code cleanup| {{{../versions/2.2.0-beta-incubating/index.html} 2.2.x-incubating docs}} | {{{https://issues.apache.org/jira/secure/ReleaseNote.jspa?version=12329586&projectId=12315923} 2.2 release notes}}| {{{http://archive.apache.org/dist/incubator/lens/2.2-beta-incubating/} Download}} | {{{#a2.2.x_from_2.1.x} 2.2.x-incompatibilities}} | - |
+*--+--+---+--+--+--+--+
+|2.1.0-beta-incubating| Estimate api, Partition timeline, DB resources, Timers on REST api| {{{../versions/2.1.0-beta-incubating/index.html} 2.1.x-incubating docs}} | {{{https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12315923&version=12328991} 2.1 release notes}}| {{{http://archive.apache.org/dist/incubator/lens/2.1-beta-incubating/} Download}} | {{{#a2.1.x_from_2.0.x} 2.1.x-incompatibilities}} | - |
+*--+--+---+--+--+--+--+
+|2.0.1-beta-incubating| First release in Apache| {{{../versions/2.0.1-beta-incubating/index.html} 2.0.x-incubating docs}} | {{{https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12315923&version=12328990} 2.0 release notes}}| {{{http://archive.apache.org/dist/incubator/lens/2.0-beta-incubating/} Download}} | - | - |
+*--+--+---+--+--+--+--+
+
+* NOTES
+
+  Binary distribution of the release does not include dependency org.acplt:oncrpc:jar:1.0.7, as its licensing (LGPL) is
+  not in compliance with Apache licensing which is required for ganglia metrics reporting. If user is interested in
+  ganglia metrics reporting, the jar needs to be downloaded and used.
+
+* Incompatibilities
+
+** 2.7.x from 2.6.x
+
+  * LENS-1387: Moved Lens to Java8
+
+  * LENS-1317: Finished_Queries store stores the LensConf
+
+  * LENS-1304: Storing Driver query in finished_queries tables for better analytics purposes
+
+** 2.6.x from 2.5.x
+
+  * LENS-919: For older deployments the schema for "finished_queries" table needs to be modified to include "priority"
+
+  * LENS-1212: Saved query service is enabled by default now. "saved_query" table will be created to store information
+    pertaining to saved queries
+
+  * LENS-833: Number of open sessions allowed for each user is capped at 10 by default now
+
+  * LENS-1244: Dropping beta from lens releases. Lens 2.6 will be a GA release
+
+  * LENS-909: Query finish email notification message body will not have query results inline in case of inmemory
+    resultset
+
+  * LENS-1198: Lens 2.6 is compatible with hive 2.1.0 and above
+
+  * LENS-1217: Old lens GUI is removed. For new GUI check
+    http://lens.apache.org/lenshome/install-and-run.html#Starting_Lens_UI
+
+  * LENS-1215: Cluster user was defaulted to operating system user by lens-client module earlier. This logic have been
+    moved to cli. Direct users of lens-client will see a change in behavior due to this modification
+
+  * LENS-1187: For metastore REST end point most of the apis returning APIResult were giving http status 200 even in
+    case of failure. The payload object had a FAILED APIResult, but the status code was 200. After this, the status
+    code comes as 500.
+
+  * LENS-1029: Lens server configuration lens.server.snapshot.interval is changed to
+    lens.server.state.persistence.interval.millis, lens.server.restart.enabled is changed to
+    lens.server.state.persistence.enabled and lens.server.recover.onrestart is removed
+
+  * LENS-1013: postDriverSelection method has been added DriverQueryHook SPI. Implementation providers need to adapt to
+    new interface (if the implementation is not extending org.apache.lens.server.api.driver.NoOpDriverQueryHook)
+
+** 2.5.x from 2.4.x
+
+  * LENS-817: Metadata class information is no longer persisted in DB due to redundancy. The 'metadataclass' column is
+    removed from finished_queries table.
+
+  * LENS-735: TableReferences can not be used to define reference dim-attributes. Now, reference dim-attribute
+    should be defined as chained column only.
+
+  * LENS-933: Driver query pre-submit hook can throw LensException now.
+
+  * LENS-920: All REST APIs will work with both application/xml and application/json accept headers. All the name="type"
+    specification in cube xsd is changed to name="_type". This makes measure type, dim_attribute type, expression type
+    and column type fields to be specified as "_type". REST API for creating fact and dimtable is changed to pass
+    sessionid as query param instead of multi-form data. Also, org.apache.lens.api.result.QueryCostTo.type is renamed to
+    org.apache.lens.api.result.QueryCostTo.costType.
+
+  * LENS-123: Multiple different instances of same driver class can be loaded. Driver config file location has changed.
+    For e.g. hivedriver-site.xml should be present in $LENS_HOME/server/conf/drivers/hive/hive1 directory.
+
+** 2.4.x from 2.3.x
+
+  * LENS-187: Moved all errors from inmobi hive to lens. All errors will be having same error code but all exceptions
+    are mapped to LensException instead of HiveException, SemanticException.
+
+  * LENS-446: Removed all server params from session and driver configurations. Earlier, all server params was passed to
+    drivers and showing through session api. We can not see anymore server side properties from session params.
+
+  * LENS-224: Driver class name also will be stored for finished queries. This will be an additional column(driverclass)
+    in finished_queries table.
+
+  * LENS-693: Purges the finished queries to DB periodically. Added a new config property
+    lens.server.querypurger.sleep.interval for configuring purge interval. No more depends on number of finished queries
+    to purge the finished queries to DB.
+
+  * LENS-734: All query output files are generated through HadoopFileFormatter and ZipFileFormatter will be having
+    query name in output file name. Earlier, query output file does not contain query name in the output file
+
+  * LENS-737: Give single error with LensMultiException to user. Earlier, we used give Internal server error to users as
+    multiple drivers gives different errors.
+
+  * LENS-774: Fixed spelling mistake in lens.server.session.expiry.service.interval.secs property.
+    Earlier, LensConfConstants.java file and lensserver-default.xml are having different property name
+    because of spelling error. Due to that we were unable to override lens.server.session.expiry.service.interval.secs
+    property.
+
+** 2.3.x from 2.2.x
+
+  * LENS-681 : Passing a malformed xml doesn't succeed anymore.
+
+  * LENS-666 : Log4j to Logback migration: log4j.properties files are not used anymore,
+    use logback.xml for specifying loggers.
+
+  * LENS-700 : Syntax and semantic errors in query no longer generate a query id, they fail at submission itself
+
+  * LENS-686 : Adding same partition will fail if the partition is already added. Adding multiple partitions
+    gives succeess or partial result depending on whether all the partitions were added or not.
+
+  * LENS-630 : Cost of a query on Hive Driver is not a constant 1 now. It now reflects the resource cost based on
+    partitions chosen for the query.
+
+  * LENS-650 : Pre submit hook is separate from User Config Loader. User Config Loader is no longer an abstract class.
+
+  * LENS-651 : In /resultset api, file size is added. File size and the already existing field num-rows are only
+    populated if needed. Default value is no more -1, it's null(unpopulated).
+    Finished queries table has one more column now, so existing tables need to be updated.
+    The following sql should work: <<< ALTER TABLE finished_queries ADD filesize bigint AFTER rows>>>
+
+** 2.2.x from 2.1.x
+
+  * LENS-484 : Fact table weight is a mandatory field now, for creating facts from the web interface. Please refer to
+  cube xsd for further details.
+
+  * LENS-553 : Java compilation version moved to Java 7 from Java 6.
+
+  * LENS-546 : Parameter names in Lens CLI will have _ (underscore) instead of - (hyphen) as a separator
+
+  * LENS-256 : Use explicit keywords for different parameter names in Lens-CLI
+
+  * LENS-486 : More structured and informative error responses for the REST interface
+
+  * LENS-487 : Consistent error response display in Lens-CLI. The output shown is different than the previous version.
+
+  * LENS-550 : Removed support for multi table select in cube queries
+
+  * LENS-563 : There was a length limitation of the property value of string that specified 'valid' column list for
+  a fact table. This change has fixed the length limitation by allowing users to set a size parameter, and multiple
+  numerically indexed keys for specifying the bigger column list.
+
+** 2.1.x from 2.0.x
+
+  * LENS-437 : Removed counts and weights from QueryPlan. The values are no longer available. If any usecase requires
+  these values, it requires a feature addition.
+
+  * LENS-338 : REST api path changed from /facts/\{factName\}/storages/\{storage\}/partitions to
+  /facts/\{factName\}/storages/\{storage\}/partition  and /dimtables/\{dimTableName\}/storages/\{storage\}/partitions to
+   /dimtables/\{dimTableName\}/storages/\{storage\}/partition for adding single partition. If single partition is
+   getting registered with old path, they need to change to use new path.
+
+  * LENS-281 : Lens server understands data(partition) availability through partition timeline instead of querying
+  metastore. When server is brought up for the first time after this feature, partition timeline will built. If it needs
+  to be updated again, table properties on storage table need to be modified by setting
+  cube.storagetable.partition.timeline.cache.present to false. All add and drop partitions should go through Lens server
+  to keep timeline updated.
+
+  * LENS-327 : Adds "QueryCost estimate(AbstractQueryContext qctx) throws LensException;" in LensDriver interface;
+  ESTIMATE is added in SubmitOp enum. If there is a driver implementation, the new api needs to be implemented.
+
+  * LENS-441 : GET on /cubes/\{cubeName\}/facts returns StringList instead of List<XFactTable>. For getting the
+  XFactTable corresponding to the name returned in StringList, user need to use GET on /facts/\{factName\}.
+
+  * LENS-275 : Session not found error code is 410, instead of 404

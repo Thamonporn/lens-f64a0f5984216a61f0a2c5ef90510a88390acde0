@@ -1,0 +1,53 @@
+~~
+~~ Licensed to the Apache Software Foundation (ASF) under one
+~~ or more contributor license agreements.  See the NOTICE file
+~~ distributed with this work for additional information
+~~ regarding copyright ownership.  The ASF licenses this file
+~~ to you under the Apache License, Version 2.0 (the
+~~ "License"); you may not use this file except in compliance
+~~ with the License.  You may obtain a copy of the License at
+~~
+~~   http://www.apache.org/licenses/LICENSE-2.0
+~~
+~~ Unless required by applicable law or agreed to in writing,
+~~ software distributed under the License is distributed on an
+~~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~~ KIND, either express or implied.  See the License for the
+~~ specific language governing permissions and limitations
+~~ under the License.
+~~
+
+Lens client configuration
+
+===
+
+*--+--+---+--+
+|<<No.>>|<<Property Name>>|<<Default Value>>|<<Description>>|
+*--+--+---+--+
+|1|lens.cli.json.pretty|false|Should CLI try to prettify the JSON of an object before priting.|
+*--+--+---+--+
+|2|lens.cli.query.execute.timeout.millis|10000|This property defines the timeout value when sync or --async false option is used to execute a query. The default value is 10 seconds.|
+*--+--+---+--+
+|3|lens.client.connection.timeout.millis|60000|This is the maximum amount of time a client is blocked for making the initial connection. The Default value for this property is 60 seconds.|
+*--+--+---+--+
+|4|lens.client.dbname|default|Default lens database|
+*--+--+---+--+
+|5|lens.client.query.poll.interval|10000|Interval at which query progress will be polled. Interval has to be given in milliseconds|
+*--+--+---+--+
+|6|lens.client.read.timeout.millis|300000|This is the maximum amount of time a client read operation is blocked waiting for data. The default value of this property is 5 mins.|
+*--+--+---+--+
+|7|lens.client.requestfilter.ws.filter.impl|org.apache.lens.client.RequestFilter|Implementation class for Request Filter|
+*--+--+---+--+
+|8|lens.client.ssl.enabled|false|Specifies whether https is enabled for lens server or not.|
+*--+--+---+--+
+|9|lens.client.ssl.ignore.server.cert|true|Specifies whether https is enabled for lens server or not.|
+*--+--+---+--+
+|10|lens.client.user.name|anonymous|Lens client user name|
+*--+--+---+--+
+|11|lens.client.ws.request.filternames|requestfilter|These JAX-RS filters would be started in the specified order when lens-client starts|
+*--+--+---+--+
+|12|lens.query.cancel.on.timeout|false|Specifies whether to attempt cancellation of a query whose execution takes longer than the timeout value specified while submitting the query for execution.|
+*--+--+---+--+
+|13|lens.server.base.url|http://0.0.0.0:9999/lensapi|The base url for the lens server|
+*--+--+---+--+
+The configuration parameters and their default values

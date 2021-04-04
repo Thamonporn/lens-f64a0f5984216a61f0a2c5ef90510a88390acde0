@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+
+-->
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+
+
+  <property>
+    <name>lens.driver.hive.kerberos.principal</name>
+    <value>hive/_HOST@APACHE.COM</value>
+    <description>Set principal name to be used for hive server.
+  </description>
+  </property>
+
+  <property>
+    <name>lens.driver.hive.connection.class</name>
+    <value>org.apache.lens.driver.hive.EmbeddedThriftConnection</value>
+    <description>The connection class from HiveDriver to HiveServer. The default is
+      an embedded connection which does not require a remote hive server.
+      For connecting to a hiveserver end point, remote connection should be used.
+      The possible values are org.apache.lens.driver.hive.EmbeddedThriftConnection
+      and org.apache.lens.driver.hive.RemoteThriftConnection.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.driver.hive.query.hook.classes</name>
+    <value></value>
+    <description>The query hook classes for hive driver. By default there are no hooks. To add a hook, you should look
+      at the default implementation and from there it'll be easy to derive what value can be added through a new hook.
+      Multiple hooks can be provided by providing comma seperated name of classes.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.driver.hive.hs2.connection.expiry.delay</name>
+    <value>600000</value>
+    <description>The idle time (in milliseconds) for expiring connection from hivedriver to HiveServer2</description>
+  </property>
+
+  <!-- Hive server client params -->
+
+  <property>
+    <name>hive.server2.thrift.bind.host</name>
+    <value></value>
+    <description>The host on which hive server is running</description>
+  </property>
+
+  <property>
+    <name>hive.server2.thrift.port</name>
+    <value>10000</value>
+    <description>The port on which hive server is running</description>
+  </property>
+
+  <property>
+    <name>hive.server2.thrift.client.retry.limit</name>
+    <value>1</value>
+    <description>Number of times to retry a Thrift service call upon failure</description>
+  </property>
+
+  <property>
+    <name>hive.server2.thrift.client.connect.retry.limit</name>
+    <value>1</value>
+    <description>Number of times to retry a connection to a Thrift hive server</description>
+  </property>
+
+  <property>
+    <name>hive.server2.thrift.client.retry.delay.seconds</name>
+    <value>1</value>
+    <description>Number of seconds the client should wait between connection attempts.</description>
+  </property>
+
+  <property>
+    <name>hive.server.tcp.keepalive</name>
+    <value>true</value>
+    <description>TCP Keep alive socket option for HiveServer connection</description>
+  </property>
+
+  <property>
+    <name>hive.server.read.socket.timeout</name>
+    <value>10</value>
+    <description>Socket timeout for the client connection</description>
+  </property>
+
+  <!-- query params -->
+
+  <property>
+    <name>lens.cube.query.driver.supported.storages</name>
+    <value></value>
+    <description>List of comma separated storage names that supported by a driver. If no value is specified, all
+      storages are valid
+    </description>
+  </property>
+
+  <property>
+    <name>lens.cube.query.replace.timedim</name>
+    <value>true</value>
+    <description>Tells whether timedim attribute queried in the time range should be replaced
+      with its corresponding partition column name.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.driver.hive.calculate.priority</name>
+    <value>true</value>
+    <description>Whether priority should be calculated for hive mr jobs or not</description>
+  </property>
+
+  <property>
+    <name>lens.driver.hive.priority.ranges</name>
+    <value>VERY_HIGH,7.0,HIGH,30.0,NORMAL,90,LOW</value>
+    <description>Priority Ranges. The numbers are the costs of the query.\
+      The cost is calculated based on partition weights and fact weights. The interpretation of the
+      default config is: \
+      \
+      cost \&lt;= 7\ \ \ \ \ \ \ \ \ \ \ :\ \ \ \ \ Priority = VERY_HIGH \
+      7 \&lt; cost \&lt;= 30\ \ \ \ \ \ \ :\ \ \ \ \ Priority = HIGH \
+      30 \&lt; cost \&lt;= 90\ \ \ \ \ \ :\ \ \ \ \ Priority = NORMAL \
+      90 \&lt; cost\ \ \ \ \ \ \ \ \ \ \ :\ \ \ \ \ Priority = LOW \
+      \
+      Some perspective wrt default weights and default ranges(1 for hourly, 0.75 for daily, 0.5 for monthly):\
+      For exclusively hourly data this translates to VERY_HIGH,7days,HIGH,30days,NORMAL,90days,LOW. \
+      FOR exclusively daily data this translates to VERY_HIGH,9days,HIGH,40days,NORMAL,120days,LOW. \
+      for exclusively monthly data this translates to VERY_HIGH,never,HIGH,1month,NORMAL,6months,LOW. \
+      \
+      One use case in range tuning can be that you never want queries to run with VERY_HIGH,
+      assuming no other changes, you'll modify the value of this param in hivedriver-site.xml to be
+      HIGH,30.0,NORMAL,90,LOW
+      \
+      via the configs, you can tune both the ranges and partition weights. this would give the end
+      user more control.
+    </description>
+  </property>
+  <property>
+    <name>lens.driver.hive.cost.calculator.class</name>
+    <value>org.apache.lens.cube.query.cost.FactPartitionBasedQueryCostCalculator</value>
+    <description>Cost calculator class. By default calculating cost through fact partitions.</description>
+  </property>
+
+  <property>
+    <name>lens.driver.hive.query.launching.constraint.factories</name>
+    <value></value>
+    <description>Factories used to instantiate constraints enforced on queries by driver. A query will be launched
+      only if all constraints pass. Every Factory should be an implementation of
+      org.apache.lens.server.api.common.ConfigBasedObjectCreationFactory and create an implementation of
+      org.apache.lens.server.api.query.constraint.QueryLaunchingConstraint.</description>
+  </property>
+
+  <property>
+    <name>lens.driver.hive.waiting.queries.selection.policy.factories</name>
+    <value></value>
+    <description>Factories used to instantiate driver specific waiting queries selection policies. Every factory should
+    be an implementation of org.apache.lens.server.api.common.ConfigBasedObjectCreationFactory and create an
+    implementation of org.apache.lens.server.api.query.collect.WaitingQueriesSelectionPolicy.</description>
+  </property>
+
+  <property>
+    <name>lens.driver.cost.query.decider.class</name>
+    <value>org.apache.lens.server.api.query.cost.RangeBasedQueryCostTypeDecider</value>
+    <description>Decider class which looks at ranges passed in config and decides the querycosttype  </description>
+  </property>
+
+  <property>
+    <name>lens.driver.cost.type.ranges</name>
+    <value>LOW,0.0,HIGH</value>
+    <description>Cost based Query type mapping</description>
+  </property>
+
+  <property>
+    <name>retry.messages.contains.map</name>
+    <value>Session handle not found=org.apache.lens.server.api.retry.ImmediateRetryHandler(2)</value>
+    <description>Comma separated error messages and retry policy</description>
+  </property>
+
+  <property>
+    <name>query.retry.policy.classes</name>
+    <value>org.apache.lens.server.api.retry.SubstringMessagePolicyDecider</value>
+    <description>List of policy decider classes</description>
+  </property>
+
+  <property>
+    <name>lens.cube.query.user.groups.authorization.enable</name>
+    <value>false</value>
+    <description>true if authorization is based on User Groups, false otherwise</description>
+  </property>
+
+  <property>
+    <name>lens.cube.query.user.name.authorization.enable</name>
+    <value>false</value>
+    <description>true if authorization is based on User Name, false otherwise</description>
+  </property>
+
+</configuration>

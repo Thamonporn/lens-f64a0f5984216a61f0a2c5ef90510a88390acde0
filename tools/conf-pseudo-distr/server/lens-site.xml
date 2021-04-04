@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+
+-->
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+
+<property>
+  <name>hive.metastore.uris</name>
+  <value>thrift://localhost:9083</value>
+  <description>Thrift URI for the remote metastore. Used by metastore client to connect to remote metastore.</description>
+</property>
+
+<property>
+  <name>lens.server.drivers</name>
+  <value>hive:org.apache.lens.driver.hive.HiveDriver,jdbc:org.apache.lens.driver.jdbc.JDBCDriver</value>
+</property>
+
+<property>
+  <name>lens.query.enable.persistent.resultset</name>
+  <value>false</value>
+</property>
+
+<property>
+  <name>lens.query.enable.persistent.resultset.indriver</name>
+  <value>false</value>
+</property>
+
+<property>
+  <name>lens.server.drivers</name>
+  <value>org.apache.lens.driver.hive.HiveDriver,org.apache.lens.driver.jdbc.JDBCDriver</value>
+  <name>lens.server.servicenames</name>
+  <value>session,query,metastore,scheduler,quota,ml</value>
+</property>
+
+<property>
+  <name>lens.server.ws.resourcenames</name>
+  <value>session,metastore,query,quota,scheduler,ml</value>
+  <description>These JAXRS resources would be started in the specified order when lensserver starts up</description>
+</property>
+
+<property>
+  <name>lens.server.ml.ws.resource.impl</name>
+  <value>org.apache.lens.ml.server.MLServiceResource</value>
+  <description>Implementation class for ML Service Resource</description>
+</property>
+
+<property>
+  <name>lens.server.ml.service.impl</name>
+  <value>org.apache.lens.ml.server.MLServiceImpl</value>
+  <description>Implementation class for ML service</description>
+</property>
+
+<property>
+  <name>lens.ml.drivers</name>
+  <value>org.apache.lens.ml.algo.spark.SparkMLDriver</value>
+</property>
+
+<property>
+  <name>lens.ml.sparkdriver.spark.master</name>
+  <value>yarn-client</value>
+</property>
+
+<property>
+  <name>hive.metastore.warehouse.dir</name>
+  <value>/tmp/hive/warehouse</value>
+</property>
+</configuration>

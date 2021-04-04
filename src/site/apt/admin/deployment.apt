@@ -1,0 +1,99 @@
+~~
+~~ Licensed to the Apache Software Foundation (ASF) under one
+~~ or more contributor license agreements.  See the NOTICE file
+~~ distributed with this work for additional information
+~~ regarding copyright ownership.  The ASF licenses this file
+~~ to you under the Apache License, Version 2.0 (the
+~~ "License"); you may not use this file except in compliance
+~~ with the License.  You may obtain a copy of the License at
+~~
+~~   http://www.apache.org/licenses/LICENSE-2.0
+~~
+~~ Unless required by applicable law or agreed to in writing,
+~~ software distributed under the License is distributed on an
+~~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~~ KIND, either express or implied.  See the License for the
+~~ specific language governing permissions and limitations
+~~ under the License.
+~~
+
+Lens server deployment
+
+  This document describes the deployment of lens server in a distributed cluster.
+  Make sure you have finished {{{../lenshome/install-and-run.html} Install and Run}} documentation,
+  before proceeding.
+
+  Lens server requires Hive metastore for providing OLAP cube metastore. Its also requires a DB for storing system
+  tables, which can be shared with Hive metastore server's underlying DB as well. Hive server is required if Hive is
+  one of the execution engines.
+
+  Typical deployment suggested is depicted in the following diagram (the boxes and lines in blue show server level
+  components, the ones in green show execution components)
+
+[/images/deployment.png] Lens Server deployment
+
+  Its recommended HiveMetastore server, HiveServer2 and Lens Server running on different machines.
+
+* Dependencies and their versions
+
+Lens Versions before 2.6 depend on hive 0.13.x and hadoop 2.x. From Lens 2.6 onwards, it depends on hive 2.1+.
+
+   * Requires java 1.7+.
+
+   * Requires Hadoop 2.x+. Tested upto hadoop 2.6.
+
+   * Requires Hive metastore of a compatible version.
+
+   * Requires Hive server2 of a compatible version.
+
+* Restart and recovery
+
+  Lens server should not have problems with Hive Metastore server, Hive Server2 or Hadoop restarts. Lens server can
+   persist its state before going down and recover from previous state upon restart.
+
+  * Recoverability
+
+    * To enable lens server with recoverability, i.e. to allow users access queries after restart, lens server should be
+   started with lens.server.state.persistence.enabled set to true. Admin can set this to false if no recoverability is
+   required.
+
+  * Restarting
+
+    * If lens server recoverability is enabled, the server will load its persisted state on restart.
+
+* Server modes
+
+  Lens server can be started in various modes. The server mode can be specified via configuration when it is starting
+   up. Available modes are
+
+  * READ_ONLY : Allows all requests on sesssion resource and Only GET requests on all other resources
+
+  * METASTORE_READONLY : Allows Only GET requests on metastore service and all other requests on other services
+
+  * METASTORE_NODROP: DELETE requests on metastore are not accepted, all other requests are accepted
+
+  * OPEN: This is the default mode. All requests are accepted
+
+* Serving logs over REST
+
+  Lens server comes with LogResource which can serve logs under LENS_LOG_DIR over REST. To enable serving logs,
+  administrator can enable log resource by adding log to configuration property "lens.server.ws.resourcenames".
+  Config changes look the following :
+
+===
+
+  <property>
+    <name>lens.server.ws.resourcenames</name>
+    <value>session,metastore,query,index,log</value>
+    <description>These JAX-RS resources would be started in the specified order when lens-server starts up</description>
+  </property>
+
+  <property>
+    <name>lens.server.log.ws.resource.impl</name>
+    <value>org.apache.lens.server.LogResource</value>
+    <description>Implementation class for Log Resource</description>
+  </property>
+
+===
+
+  If resourcenames does not contain "log", it is not enabled.

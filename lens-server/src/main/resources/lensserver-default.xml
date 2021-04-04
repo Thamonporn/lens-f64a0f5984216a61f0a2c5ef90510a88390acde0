@@ -1,0 +1,1022 @@
+<?xml version="1.0"?>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+
+-->
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+  <property>
+    <name>lens.server.drivers</name>
+    <value>hive:org.apache.lens.driver.hive.HiveDriver</value>
+    <description>Drivers enabled for this lens server instance</description>
+  </property>
+
+  <property>
+    <name>lens.server.driver.selector.class</name>
+    <value>org.apache.lens.server.api.driver.MinQueryCostSelector</value>
+    <description>Class for selecting best driver given the query context</description>
+  </property>
+
+  <property>
+    <name>lens.server.query.acceptors</name>
+    <value></value>
+    <description>Query Acceptors configured. Query acceptors are consulted first, before anything happens for the
+      given query. They can either return null or return a messaging indicating why the given query shouldn't be
+      accepted. These can be used to filter out queries at the earliest.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.query.phase1.rewriters</name>
+    <value></value>
+    <description>Query phase 1 rewriters. This is to convert user query to cube query. The resulting cube query will
+      be passed for validation and rewriting to hql query.\
+      Use cases will be to use extra intelligence to convert user query to optimized cube query.\
+      Or define shortcuts for certain frequently used queries :)
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.servicenames</name>
+    <value>session,alarm,query,savedquery,metastore,scheduler,quota</value>
+    <description>These services would be started in the specified order when lens-server starts up</description>
+  </property>
+
+  <property>
+    <name>lens.server.session.service.impl</name>
+    <value>org.apache.lens.server.session.HiveSessionService</value>
+    <description>Implementation class for session service</description>
+  </property>
+
+  <property>
+    <name>lens.server.query.service.impl</name>
+    <value>org.apache.lens.server.query.QueryExecutionServiceImpl</value>
+    <description>Implementation class for query execution service</description>
+  </property>
+
+  <property>
+    <name>lens.server.savedquery.service.impl</name>
+    <value>org.apache.lens.server.query.save.SavedQueryServiceImpl</value>
+    <description>Implementation class for saved query service</description>
+  </property>
+
+  <property>
+    <name>lens.server.quota.service.impl</name>
+    <value>org.apache.lens.server.quota.QuotaServiceImpl</value>
+    <description>Implementation class for quota service</description>
+  </property>
+
+  <property>
+    <name>lens.server.metastore.service.impl</name>
+    <value>org.apache.lens.server.metastore.CubeMetastoreServiceImpl</value>
+    <description>Implementation class for metastore service</description>
+  </property>
+
+  <property>
+    <name>lens.server.alarm.service.impl</name>
+    <value>org.apache.lens.server.scheduler.AlarmService</value>
+    <description>Implementation class for alarm service</description>
+  </property>
+
+  <property>
+    <name>lens.server.scheduler.service.impl</name>
+    <value>org.apache.lens.server.scheduler.SchedulerServiceImpl</value>
+    <description>Implementation class for query scheduler service</description>
+  </property>
+
+  <property>
+    <name>lens.server.base.url</name>
+    <value>http://0.0.0.0:9999/lensapi/</value>
+    <description>The base url for the lens server</description>
+  </property>
+
+  <property>
+    <name>lens.server.query.state.logger.enabled</name>
+    <value>true</value>
+    <description>Disable or enable the query state logger with this config.
+      The location for the logger can be specified in logback xml for the class
+      org.apache.lens.server.query.QueryExecutionServiceImpl.QueryStatusLogger
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.event.service.thread.pool.size</name>
+    <value></value>
+    <description>The size of thread pool for notifying events. The no value is specified,
+      it uses the available processors as the number.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.enable.console.metrics</name>
+    <value>false</value>
+    <description>Enable metrics to be reported on console</description>
+  </property>
+
+  <property>
+    <name>lens.server.enable.csv.metrics</name>
+    <value>false</value>
+    <description>Enable metrics to be reported as csv files in a directory</description>
+  </property>
+
+  <property>
+    <name>lens.server.metrics.csv.directory.path</name>
+    <value>metrics/</value>
+    <description>Path of the directory in which to report metrics as separate csv files. </description>
+  </property>
+
+  <property>
+    <name>lens.server.enable.ganglia.metrics</name>
+    <value>false</value>
+    <description>Enable metrics to be reported on ganglia</description>
+  </property>
+
+  <property>
+    <name>lens.server.metrics.ganglia.host</name>
+    <value></value>
+    <description>The ganglia host name</description>
+  </property>
+
+  <property>
+    <name>lens.server.metrics.ganglia.port</name>
+    <value></value>
+    <description>The ganglia port</description>
+  </property>
+
+  <property>
+    <name>lens.server.enable.graphite.metrics</name>
+    <value>false</value>
+    <description>Enable metrics to be reported on graphite</description>
+  </property>
+
+  <property>
+    <name>lens.server.metrics.graphite.host</name>
+    <value></value>
+    <description>The graphite host name</description>
+  </property>
+
+  <property>
+    <name>lens.server.metrics.graphite.port</name>
+    <value></value>
+    <description>The graphite port</description>
+  </property>
+
+  <property>
+    <name>lens.server.enable.resource.method.metering</name>
+    <value>false</value>
+    <description>Whether to Enable metering for all resource methods.</description>
+  </property>
+
+  <property>
+    <name>lens.server.metrics.reporting.period</name>
+    <value>10</value>
+    <description>The reporting period for metrics. The value is in seconds</description>
+  </property>
+
+  <property>
+    <name>lens.server.state.persistence.enabled</name>
+    <value>true</value>
+    <description>If flag is enabled, state of all the services will be persisted periodically to a location
+      specified by lens.server.persist.location and on server restart all the services will be started
+      from last saved state.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.state.persistence.interval.millis</name>
+    <value>300000</value>
+    <description>Lens server state persistence time interval in milliseconds</description>
+  </property>
+
+  <property>
+    <name>lens.server.persist.location</name>
+    <value>file:///tmp/lensserver</value>
+    <description>The directory in which lens server will persist its state when it is
+      going down. The location be on any Hadoop compatible file system. Server will read from
+      the location when it is restarted and recovery is enabled. So, Server should have
+      both read and write permissions to the location
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.mode</name>
+    <value>OPEN</value>
+    <description>The mode in which server should run. Allowed values are OPEN, READ_ONLY,
+      METASTORE_READONLY, METASTORE_NODROP. OPEN mode will allow all requests. READ_ONLY mode
+      will allow all requests on session resouce and only GET requests on all other resources.
+      METASTORE_READONLY will allow GET on metastore and all other requests in other services.
+      METASTORE_NODROP will not allow DELETE on metastore, will allow all other requests.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.session.timeout.seconds</name>
+    <value>86400</value>
+    <description>Lens session timeout in seconds.If there is no activity on
+      the session for this period then the session will be closed.Default timeout is one day.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.statistics.store.class</name>
+    <value>org.apache.lens.server.stats.store.log.LogStatisticsStore</value>
+    <description>Default implementation of class used to persist Lens Statistics.</description>
+  </property>
+
+  <property>
+    <name>lens.server.statistics.log.rollover.interval</name>
+    <value>3600000</value>
+    <description>Default rate which log statistics store scans for rollups in milliseconds.</description>
+  </property>
+
+  <property>
+    <name>lens.server.statistics.warehouse.dir</name>
+    <value>file:///tmp/lens/statistics/warehouse</value>
+    <description>Default top level location where stats are moved by the log statistics store.</description>
+  </property>
+
+  <property>
+    <name>lens.server.statistics.db</name>
+    <value>lensstats</value>
+    <description>Database to which statistics tables are created and partitions are added.</description>
+  </property>
+
+  <!-- Query Result Purger Configurations -->
+  <property>
+    <name>lens.server.resultset.purge.enabled</name>
+    <value>false</value>
+    <description>Whether to purge the query results </description>
+  </property>
+
+  <property>
+    <name>lens.server.resultsetpurger.sleep.interval.secs</name>
+    <value>3600</value>
+    <description>Periodicity for Query result purger runs. Default 1 hour. </description>
+  </property>
+
+  <property>
+    <name>lens.server.query.resultset.retention</name>
+    <value>1 day</value>
+    <description>Lens query resultset retention period. Default 1 day </description>
+  </property>
+
+  <property>
+    <name>lens.server.hdfs.output.retention</name>
+    <value>1 day</value>
+    <description>hdfs output retention period. Default 1 day</description>
+  </property>
+
+  <!-- Finished Query Purging Configurations -->
+  <property>
+    <name>lens.server.querypurger.sleep.interval</name>
+    <value>10000</value>
+    <description>The interval(milliseconds) with which purger to run periodically. Default 10 sec. </description>
+  </property>
+
+  <property>
+    <name>lens.server.query.expiry.check.interval.millis</name>
+    <value>60000</value>
+    <description>The interval(milliseconds) with which query expiry will run periodically. Default is 1 minute. The
+      value needs to be much lower than lens.query.timeout.millis. If the final deployment values of query timeout
+      can be smaller, then reduce this value to be much lower.
+    </description>
+  </property>
+  <property>
+    <name>lens.server.inmemory.resultset.ttl.secs</name>
+    <value>300</value>
+    <description>This property defines the TTL(time to live) in seconds for all result sets of type InMemoryResultSet
+     beyond which they are eligible for purging irrespective of whether the result set has been read or not.
+     The default value is 300 seconds (5 minutes).
+     </description>
+  </property>
+
+  <property>
+    <name>lens.server.domain</name>
+    <value>company.com</value>
+    <description>Server domain. This will be used in authentication and Sending emails to users.
+      For the server, the username will be without domain and domain will come through conf.
+    </description>
+  </property>
+  <property>
+    <name>lens.server.db.driver.name</name>
+    <value>org.hsqldb.jdbcDriver</value>
+    <description>Database driver for database where Finished queries have to be stored.
+      Also used for database based user config loaders
+    </description>
+  </property>
+  <property>
+    <name>lens.server.db.jdbc.url</name>
+    <value>jdbc:hsqldb:/tmp/lensserver/queries.db</value>
+    <description>JDBC URL where the database for storing finished queries is located.
+      Also used for database based user config loaders
+    </description>
+  </property>
+  <property>
+    <name>lens.server.db.jdbc.user</name>
+    <value>SA</value>
+    <description>JDBC User for Finished queries table. Also used for database based user config loaders</description>
+  </property>
+  <property>
+    <name>lens.server.db.jdbc.pass</name>
+    <value></value>
+    <description>JDBC Password for Finished queries table. Also used for database based user config loaders
+    </description>
+  </property>
+  <property>
+    <name>lens.server.db.validation.query</name>
+    <value>select 1 from INFORMATION_SCHEMA.SYSTEM_USERS</value>
+    <description>BasicDatasource has a config parameter called validationQuery. This query is run before passing
+      the Datasource to the application to verify if connection is valid.\
+      {{{http://commons.apache.org/proper/commons-dbcp/configuration.html}dbcp configuration}} \
+      {{{http://stackoverflow.com/questions/10684244/dbcp-validationquery-for-different-databases}validationquery for different databases}} \
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.mail.from.address</name>
+    <value>blah@company.com</value>
+    <description>The from field in the notifier mail to the submitter.</description>
+  </property>
+
+  <property>
+    <name>lens.server.mail.host</name>
+    <value>mail-host.company.com</value>
+    <description>SMTP Host for sending mail</description>
+  </property>
+
+  <property>
+    <name>lens.server.mail.port</name>
+    <value>25</value>
+    <description>SMTP Port</description>
+  </property>
+
+  <property>
+    <name>lens.server.mail.smtp.timeout</name>
+    <value>30000</value>
+    <description>Socket read timeout value in milliseconds. This timeout is implemented by java.net.Socket. Default is
+      30 seconds.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.mail.smtp.connectiontimeout</name>
+    <value>15000</value>
+    <description>Socket connection timeout value in milliseconds. This timeout is implemented by java.net.Socket.
+      Default is 15 seconds.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.ws.resourcenames</name>
+    <value>session,metastore,query,savedquery,quota,scheduler,index,log</value>
+    <description>These JAX-RS resources would be started in the specified order when lens-server starts up</description>
+  </property>
+
+  <property>
+    <name>lens.server.session.ws.resource.impl</name>
+    <value>org.apache.lens.server.session.SessionResource</value>
+    <description>Implementation class for Session Resource</description>
+  </property>
+
+  <property>
+    <name>lens.server.savedquery.ws.resource.impl</name>
+    <value>org.apache.lens.server.query.save.SavedQueryResource</value>
+    <description>Implementation class for Saved query Resource</description>
+  </property>
+
+  <property>
+    <name>lens.server.query.ws.resource.impl</name>
+    <value>org.apache.lens.server.query.QueryServiceResource</value>
+    <description>Implementation class for Query Resource</description>
+  </property>
+
+  <property>
+    <name>lens.server.quota.ws.resource.impl</name>
+    <value>org.apache.lens.server.quota.QuotaResource</value>
+    <description>Implementation class for Quota Resource</description>
+  </property>
+
+  <property>
+    <name>lens.server.index.ws.resource.impl</name>
+    <value>org.apache.lens.server.IndexResource</value>
+    <description>Implementation class for Index Resource</description>
+  </property>
+
+  <property>
+    <name>lens.server.log.ws.resource.impl</name>
+    <value>org.apache.lens.server.LogResource</value>
+    <description>Implementation class for Log Resource</description>
+  </property>
+
+  <property>
+    <name>lens.server.metastore.ws.resource.impl</name>
+    <value>org.apache.lens.server.metastore.MetastoreResource</value>
+    <description>Implementation class for Metastore Resource</description>
+  </property>
+
+  <property>
+    <name>lens.server.scheduler.ws.resource.impl</name>
+    <value>org.apache.lens.server.scheduler.ScheduleResource</value>
+    <description>Implementation class for query scheduler resource</description>
+  </property>
+
+  <property>
+    <name>lens.server.ws.featurenames</name>
+    <value>multipart,moxyjson,moxyjsonconfigresovler</value>
+    <description>These JAX-RS Feature(s) would be started in the specified order when lens-server starts up
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.multipart.ws.feature.impl</name>
+    <value>org.glassfish.jersey.media.multipart.MultiPartFeature</value>
+    <description>Implementation class for query scheduler resource</description>
+  </property>
+
+  <property>
+    <name>lens.server.moxyjson.ws.feature.impl</name>
+    <value>org.glassfish.jersey.moxy.json.MoxyJsonFeature</value>
+    <description>Enable Moxy json feature </description>
+  </property>
+  <property>
+    <name>lens.server.moxyjsonconfigresovler.ws.feature.impl</name>
+    <value>org.apache.lens.api.util.MoxyJsonConfigurationContextResolver</value>
+    <description>Moxy json configuration resolver</description>
+  </property>
+  <property>
+    <name>lens.server.ws.filternames</name>
+    <value>requestlogger,consistentState,serverMode</value>
+    <description>These JAX-RS filters would be started in the specified order when lens-server starts up</description>
+  </property>
+
+  <property>
+    <name>lens.server.requestlogger.ws.filter.impl</name>
+    <value>org.apache.lens.server.LensRequestLoggingFilter</value>
+    <description>Implementation class for Request logging Filter</description>
+  </property>
+
+  <property>
+    <name>lens.server.consistentState.ws.filter.impl</name>
+    <value>org.apache.lens.server.ConsistentStateFilter</value>
+    <description>Implementation class for ConsistentState Filter</description>
+  </property>
+
+  <property>
+    <name>lens.server.serverMode.ws.filter.impl</name>
+    <value>org.apache.lens.server.ServerModeFilter</value>
+    <description>Implementation class for ServerMode Filter</description>
+  </property>
+
+  <property>
+    <name>lens.server.ws.listenernames</name>
+    <value>appevent</value>
+    <description>These listeners would be called in the specified order when lens-server starts up</description>
+  </property>
+
+  <property>
+    <name>lens.server.appevent.ws.listener.impl</name>
+    <value>org.apache.lens.server.LensApplicationListener</value>
+    <description>Implementation class for Lens Application Listener</description>
+  </property>
+
+  <!-- CLI service properties which can be overriden for LENS services -->
+
+  <property>
+    <name>hive.server2.idle.session.timeout</name>
+    <value>0</value>
+    <description>Session should be closed by lens. There would be a mismatch when hive has closed session due to timeout
+    and lens is not aware of that.</description>
+  </property>
+    <property>
+    <name>hive.server2.idle.operation.timeout</name>
+    <value>0</value>
+    <description>Closing of operations should be handled by lens. Hive should not invalidate operations upon timeout
+    </description>
+  </property>
+  <property>
+    <name>hive.server2.async.exec.threads</name>
+    <value>5</value>
+    <description>Number of threads required in async thread pool for query execution in the lens directly. Lens uses
+      query execution directly only to add and delete resources, which are mostly synchronous. So keeping to a lower
+      value.
+    </description>
+  </property>
+
+  <property>
+    <name>hive.server2.log.redirection.enabled</name>
+    <value>false</value>
+    <description>Disable the log direction on the lens server sessions. There are no logs required for each session in
+      lens sessions. This will decrease number of file handles associated to lens server.
+    </description>
+  </property>
+
+  <property>
+    <name>hive.server2.logging.operation.enabled</name>
+    <value>false</value>
+    <description>Disable the operation logging, since there are no execution operation happening in lens session.
+      Keeping it true might conflict with Hive Server if both are running on the same machine causing disappearance
+      of the operation log directory.
+    </description>
+  </property>
+
+  <property>
+    <name>hive.server2.authentication</name>
+    <value>NONE</value>
+    <description>
+      Client authentication types.
+      NONE: no authentication check
+      LDAP: LDAP/AD based authentication
+      KERBEROS: Kerberos/GSSAPI authentication
+      CUSTOM: Custom authentication provider
+      (Use with property hive.server2.custom.authentication.class)
+      PAM: Pluggable authentication module.
+    </description>
+  </property>
+
+  <property>
+    <name>hive.server2.authentication.ldap.url</name>
+    <value></value>
+    <description>
+      LDAP connection URL
+    </description>
+  </property>
+
+  <property>
+    <name>hive.server2.authentication.ldap.security.protocol</name>
+    <value>ssl</value>
+    <description>
+      Its value is a string determined by the service provider (e.g. "ssl").
+      If this property is unspecified, the behaviour is determined by the service provider.
+      It's value will be directly passed as "java.naming.security.protocol"
+    </description>
+  </property>
+
+  <property>
+    <name>hive.server2.authentication.ldap.baseDN</name>
+    <value></value>
+    <description>
+      LDAP base DN
+    </description>
+  </property>
+
+  <property>
+    <name>hive.server2.authentication.ldap.Domain</name>
+    <value></value>
+    <description>
+      The ldap domin
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.user.resolver.type</name>
+    <value>FIXED</value>
+    <description>Type of user config resolver. allowed values are FIXED, PROPERTYBASED, DATABASE, LDAP_BACKED_DATABASE,
+      CUSTOM.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.user.group.type</name>
+    <value>FIXED</value>
+    <description>Type of user group config resolver. allowed values are FIXED, CUSTOM.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.user.resolver.fixed.value</name>
+    <value></value>
+    <description>Required for FIXED user resolver.
+      when lens.server.user.resolver.type=FIXED, This will be the value cluster user will resolve to.
+    </description>
+  </property>
+
+
+  <property>
+    <name>lens.server.user.group.fixed.value</name>
+    <value>test</value>
+    <description>Required for FIXED user group resolver.
+      when lens.server.user.group.type=FIXED, This will be the value user groups will resolve to.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.user.resolver.propertybased.filename</name>
+    <value>/path/to/propertyfile</value>
+    <description>Required for PROPERTYBASED user resolver.
+      when lens.server.user.resolver.type is PROPERTYBASED, then this file will be read and parsed to
+      determine cluster user. Each line should contain username followed by DOT followed by property full name
+      followed by equal-to sign and followed by value.
+      example schema of the file is:
+      user1.lens.server.cluster.user=clusteruser1
+      user1.mapred.job.queue.name=queue1
+      *.lens.server.cluster.user=defaultclusteruser
+      *.mapred.job.queue.name=default
+    </description>
+  </property>
+  <property>
+    <name>lens.server.user.resolver.custom.class</name>
+    <value>full.package.name.Classname</value>
+    <description>Required for CUSTOM user resolver.
+      In case the provided implementations are not sufficient for user config resolver,
+      a custom classname can be provided. Class should extend org.apache.lens.server.user.UserConfigLoader
+    </description>
+  </property>
+  <property>
+    <name>lens.server.user.resolver.db.keys</name>
+    <value>lens.session.cluster.user,mapred.job.queue.name</value>
+    <description>Required for DATABASE and LDAP_BACKED_DATABASE user resolvers.
+      For database based user config loaders, the conf keys that will be loaded from database.
+    </description>
+  </property>
+  <property>
+    <name>lens.server.user.resolver.db.query</name>
+    <value>select clusteruser,queue from user_config_table where username=?</value>
+    <description>Required for DATABASE and LDAP_BACKED_DATABASE user resolvers.
+      For database based user config loader, this query will be run with single argument = logged in user
+      and the result columns will be assigned to lens.server.user.resolver.db.keys in order.
+      For ldap backed database resolver, the argument to this query will be the intermediate values obtained from ldap.
+    </description>
+  </property>
+  <property>
+    <name>lens.server.user.resolver.ldap.intermediate.db.query</name>
+    <value>select department from user_department where username=? and expiry>?</value>
+    <description>Required for LDAP_BACKED_DATABASE user resolvers.
+      query to obtain intermediate values from database backing ldap as cache.
+      two arguments: logged in user and current time.
+    </description>
+  </property>
+  <property>
+    <name>lens.server.user.resolver.ldap.intermediate.db.delete.sql</name>
+    <value>delete from user_department where username=?</value>
+    <description>Required for LDAP_BACKED_DATABASE user resolvers.
+      query to delete intermediate values from database backing ldap as cache.
+      one argument: logged in user.
+    </description>
+  </property>
+  <property>
+    <name>lens.server.user.resolver.ldap.intermediate.db.insert.sql</name>
+    <value>insert into user_department (username, department, expiry) values (?, ?, ?)</value>
+    <description>Required for LDAP_BACKED_DATABASE user resolvers.
+      query to insert intermediate values from database backing ldap as cache.
+      arguments: first logged in user, then all intermediate values, then current time + expiration time
+    </description>
+  </property>
+  <property>
+    <name>lens.server.user.resolver.ldap.fields</name>
+    <value>department</value>
+    <description>Required for LDAP_BACKED_DATABASE user resolvers.
+      list of fields to be obtained from ldap. These will be cached by the intermediate db.
+    </description>
+  </property>
+  <property>
+    <name>lens.server.user.resolver.ldap.bind.dn</name>
+    <value></value>
+    <description>Required for LDAP_BACKED_DATABASE user resolvers.
+      ldap dn for admin binding
+      example: CN=company-it-admin,ou=service-account,ou=company-service-account,dc=dc1,dc=com...
+    </description>
+  </property>
+  <property>
+    <name>lens.server.user.resolver.ldap.bind.password</name>
+    <value></value>
+    <description>Required for LDAP_BACKED_DATABASE user resolvers.
+      ldap password for admin binding above
+    </description>
+  </property>
+  <property>
+    <name>lens.server.user.resolver.ldap.search.base</name>
+    <value></value>
+    <description>Required for LDAP_BACKED_DATABASE user resolvers.
+      for searching intermediate values for a user, the search keys.
+      example: cn=users,dc=dc1,dc=dc2...
+    </description>
+  </property>
+  <property>
+    <name>lens.server.user.resolver.ldap.search.filter</name>
+    <value>(&amp;(objectClass=user)(sAMAccountName=%s))</value>
+    <description>Required for LDAP_BACKED_DATABASE user resolvers.
+      filter pattern for ldap search
+    </description>
+  </property>
+  <property>
+    <name>lens.server.user.resolver.ldap.url</name>
+    <value></value>
+    <description>Required for LDAP_BACKED_DATABASE user resolvers.
+      ldap url to connect to.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.service.provider.factory</name>
+    <value>org.apache.lens.server.ServiceProviderFactoryImpl</value>
+    <final>true</final>
+    <description>Service provider factory implementation class. This parameter is used
+      to lookup the factory implementation class name that would provide an
+      instance of ServiceProvider. Users should instantiate the class to obtain its instance.
+
+      Example
+      --
+      Class spfClass
+      = conf.getClass("lens.server.service.provider.factory",
+      null, ServiceProviderFactory.class);
+
+      ServiceProviderFactory spf = spfClass.newInstance();
+      ServiceProvider serviceProvider = spf.getServiceProvider();
+      --
+      This is not supposed to be overridden by users.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.state.persist.out.stream.buffer.size</name>
+    <value>1048576</value>
+    <description>Output Stream Buffer Size used in writing lens server state to file system. Size is in bytes.</description>
+  </property>
+
+  <property>
+    <name>lens.server.database.resource.dir</name>
+    <value>/tmp/lens/resources</value>
+    <description>Top level directory to store database specific static resources which are added to each database.
+    To add a static resource for a DB, create a directory with the same name as that of the DB under this directory, and
+    place the resources inside the DB directory. Any subdirectories under the DB directory and the resources under them
+    will be ignored</description>
+  </property>
+
+  <property>
+    <name>lens.server.estimate.timeout.millis</name>
+    <value>300000</value>
+    <description>Timeout for parallel query estimate calls in milliseconds.
+      A driver needs to comeback with a query estimate within this timeout. If the timeout is reached, only the drivers
+      that have provided an estimate would be considered for query selection. If the timeout is reached and none
+      of the drivers have provided an estimate then estimate calls fails with an exception.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.estimate.pool.min.threads</name>
+    <value>3</value>
+    <description>Minimum number of threads in the estimate thread pool</description>
+  </property>
+
+  <property>
+    <name>lens.server.estimate.pool.max.threads</name>
+    <value>100</value>
+    <description>Maximum number of threads in the estimate thread pool</description>
+  </property>
+
+  <property>
+    <name>lens.server.estimate.pool.keepalive.millis</name>
+    <value>60000</value>
+    <description>Thread keep alive time in milliseconds for the estimate thread pool.
+      If there are no estimate requests for this period,then cached threads are released from the pool.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.launcher.pool.min.threads</name>
+    <value>3</value>
+    <description>Minimum number of threads in the query launcher thread pool</description>
+  </property>
+
+  <property>
+    <name>lens.server.launcher.pool.max.threads</name>
+    <value>100</value>
+    <description>Maximum number of threads in the query launcher thread pool. Keeping the default to hundred, we may
+      never grow till there, it would go to max for concurrrent queries allowed on all drivers together.
+      This value should be greater than the max concurrent queries allowed on all drivers. </description>
+  </property>
+
+  <property>
+    <name>lens.server.launcher.pool.keepalive.millis</name>
+    <value>60000</value>
+    <description>Thread keep alive time in milliseconds for the query launcher thread pool.
+      If there are no query launches for this period,then cached threads will be released from the pool.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.session.expiry.service.interval.secs</name>
+    <value>3600</value>
+    <description>Interval at which lens session expiry service runs</description>
+  </property>
+
+  <property>
+    <name>lens.server.scheduling.queue.poll.interval.millisec</name>
+    <value>2000</value>
+    <description>The interval at which submission thread will poll scheduling queue to fetch the next query for
+      submission. If value is less than equal to 0, then it would mean that thread will continuosly poll without
+      sleeping. The interval has to be given in milliseconds.</description>
+  </property>
+
+  <property>
+    <name>lens.server.query.launching.constraint.factories</name>
+    <value>org.apache.lens.server.query.constraint.TotalQueryCostCeilingConstraintFactory</value>
+    <description>Factories used to instantiate constraints enforced on queries by lens. Every Factory should be an
+      implementation of org.apache.lens.server.api.common.ConfigBasedObjectCreationFactory and create an implementation
+      of org.apache.lens.server.api.query.constraint.QueryLaunchingConstraint. A query will be launched only if all
+      constraints pass.</description>
+  </property>
+
+  <property>
+    <name>lens.server.total.query.cost.ceiling.per.user</name>
+    <value>-1.0</value>
+    <description>A query submitted by user will be launched only if total query cost of all current
+      launched queries of user is less than or equal to total query cost ceiling defined by this property.
+      This configuration value is only useful when TotalQueryCostCeilingConstraint is enabled by using
+      org.apache.lens.server.query.constraint.TotalQueryCostCeilingConstraintFactory as one of the factories in
+      lens.server.query.constraint.factories property. Default is -1.0 which means that there is no limit on the total
+      query cost of launched queries submitted by a user.</description>
+  </property>
+
+  <property>
+    <name>lens.server.waiting.queries.selection.policy.factories</name>
+    <value>org.apache.lens.server.query.collect.UserSpecificWaitingQueriesSelectionPolicyFactory</value>
+    <description>Factories used to instantiate waiting queries selection policies. Every factory should
+      be an implementation of org.apache.lens.server.api.common.ConfigBasedObjectCreationFactory and create an
+      implementation of org.apache.lens.server.api.query.collect.WaitingQueriesSelectionPolicy.</description>
+  </property>
+
+  <property>
+    <name>lens.server.savedquery.jdbc.dialectclass</name>
+    <value>org.apache.lens.server.query.save.SavedQueryDao$HSQLDialect</value>
+    <description>Dialect of the target DB, Default is HSQL. Override with the target DB used.</description>
+  </property>
+
+  <property>
+    <name>lens.server.savedquery.list.default.offset</name>
+    <value>0</value>
+    <description>Key denoting the default start value of saved query list api.</description>
+  </property>
+  <property>
+    <name>lens.server.savedquery.list.default.count</name>
+    <value>20</value>
+    <description>Key denoting the default fetch value of saved query list api.</description>
+  </property>
+  <property>
+    <name>lens.server.max.sessions.per.user</name>
+    <value>10</value>
+    <description>Number of sessions can be allowed for each user.
+      User has to close one of the active sessions to open a new session once limit is reached. Otherwise Server throws
+      an exception by saying that opened session limit has been already reached for user.
+    </description>
+  </property>
+  <property>
+    <name>lens.server.status.update.num.retries</name>
+    <value>10</value>
+    <description>The number of retries a status update will tried with exponentital back off, in case of transient
+      issues, upon which query will be marked FAILED.
+    </description>
+  </property>
+  <property>
+    <name>lens.server.status.update.maximum.delay.secs</name>
+    <value>1800</value>
+    <description>The maximum delay in seconds for next status update to happen after any transient failure. This will
+      be used a maximum delay sothat exponential wait times not to grow to bigger value.
+    </description>
+  </property>
+  <property>
+    <name>lens.server.duplicate.query.allowed</name>
+    <value>false</value>
+    <description>If this is false and same query is submitted by a user in the same session
+      and with the same configuration while earlier query is not completed then
+      lens server will return the handle of the previous query
+    </description>
+  </property>
+   <property>
+    <name>lens.server.scheduler.store.class</name>
+    <value>org.apache.lens.server.scheduler.SchedulerDAO$SchedulerHsqlDBStore</value>
+    <description>A subclass of SchedulerDBStore class used for storing scheduler related information.
+    </description>
+  </property>
+  <property>
+    <name>lens.server.status.update.exponential.wait.millis</name>
+    <value>30000</value>
+    <description>Number of millis that would grow exponentially for next update, incase of transient failures.
+    </description>
+  </property>
+  <property>
+    <name>lens.query.current.time.millis</name>
+    <value>0</value>
+    <description>Query current time in millis. This is used to resolve 'now'. If value is set to zero, 'now' is
+     resolved to current value</description>
+  </property>
+
+  <property>
+    <name>lens.server.http.notification.conn.timeout.millis</name>
+    <value>5000</value>
+    <description>This is the connection timeout for all HTTP Notifications sent by lens server.
+      Default connection timeout is 5 secs</description>
+  </property>
+  <property>
+    <name>lens.server.http.notification.read.timeout.millis</name>
+    <value>10000</value>
+    <description>This is the read timeout for all HTTP Notifications sent by lens server.
+      Default read timeout is 10 secs</description>
+  </property>
+
+  <property>
+    <name>lens.server.grizzly.core.pool.size</name>
+    <value>20</value>
+    <description>Core pool size for lens grizzly server</description>
+  </property>
+  <property>
+    <name>lens.server.grizzly.max.pool.size</name>
+    <value>40</value>
+    <description>Max pool size for lens grizzly server</description>
+  </property>
+   <property>
+    <name>lens.server.scheduler.instance.waiting.thread.interval.millis</name>
+    <value>300000</value>
+    <description>Thread interval for checking the waiting instances in milliseconds</description>
+  </property>
+  <property>
+    <name>lens.server.scheduler.max.job.per.user</name>
+    <value>-1</value>
+    <description>Maximum number of jobs that can be scheduled by a single user. If the number is less than zero,
+       then there is no restriction on the number of jobs scheduled.
+    </description>
+  </property>
+  <property>
+    <name>lens.server.query.cost.parser.class</name>
+    <value>org.apache.lens.server.api.query.cost.FactPartitionBasedQueryCost$Parser</value>
+    <description>The Query cost parser class. Default query cost class used is FactPartitionBasedQueryCost</description>
+  </property>
+
+  <property>
+    <name>lens.server.query.comparator.classes</name>
+    <value>org.apache.lens.server.api.query.comparators.MoreRetriesFirstComparator,org.apache.lens.server.api.query.comparators.QueryPriorityComparator,org.apache.lens.server.api.query.comparators.FIFOQueryComparator</value>
+    <description>The Query cost comparator chain. Queries are compared in this order. To compare queries q1 and q2,
+    first number of retries are considered. The one with more retries is placed first in the queue. If those are same,
+    then their priorities are considered, with higher priorities coming before lower ones. If those are also same,
+    then their submission times are considered. The query that was submitted first is placed first.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.cube.metastore.enable.datacompleteness.check</name>
+    <value>false</value>
+    <description>This property is to enable Data Completeness Checks while resolving partitions.</description>
+  </property>
+  <property>
+    <name>lens.cube.metastore.completeness.checker.class</name>
+    <value>org.apache.lens.server.api.metastore.DefaultChecker</value>
+    <description>The class that implements the DataCompletenessChecker Interface. This will take effect if the flag
+      "lens.cube.metastore.enable.datacompleteness.check" is set.
+    </description>
+  </property>
+
+  <property>
+    <name>lens.server.kdc.login.service.interval.minutes</name>
+    <value>360</value>
+    <description>interval in minutes to refresh auth token when kerberos is enabled on hdfs and/or hive, metastore</description>
+  </property>
+
+  <property>
+    <name>lens.server.principal</name>
+    <value>lens/_HOST@APACHE.COM</value>
+    <description>lens server principal name, must be in format lens/_HOST@KDC_REALM</description>
+  </property>
+
+  <property>
+    <name>lens.server.ssl.enabled</name>
+    <value>false</value>
+    <description>flag to enable https communication between lens server and client.</description>
+  </property>
+
+  <property>
+    <name>lens.server.ssl.file.path</name>
+    <value>/tmp/certs</value>
+    <description>local path for cert file if ssl ie enabled.</description>
+  </property>
+
+  <property>
+    <name>lens.server.ssl.password</name>
+    <value>password</value>
+    <description>password for cert file</description>
+  </property>
+
+  <property>
+    <name>lens.server.authorizer.class</name>
+    <value>org.apache.lens.server.api.authorization.DefaultAuthorizer</value>
+    <description>The class that implements the Authorizer Interface. It will be used wherever authorization check
+    is enabled</description>
+  </property>
+
+</configuration>

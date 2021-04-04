@@ -1,0 +1,82 @@
+~~
+~~ Licensed to the Apache Software Foundation (ASF) under one
+~~ or more contributor license agreements.  See the NOTICE file
+~~ distributed with this work for additional information
+~~ regarding copyright ownership.  The ASF licenses this file
+~~ to you under the Apache License, Version 2.0 (the
+~~ "License"); you may not use this file except in compliance
+~~ with the License.  You may obtain a copy of the License at
+~~
+~~   http://www.apache.org/licenses/LICENSE-2.0
+~~
+~~ Unless required by applicable law or agreed to in writing,
+~~ software distributed under the License is distributed on an
+~~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~~ KIND, either express or implied.  See the License for the
+~~ specific language governing permissions and limitations
+~~ under the License.
+~~
+
+Configuring lens server
+
+  This document guides you through configuring lens server.
+  
+* Server configuration
+
+  Lens server provides you with various configuration options. Administrator
+  can configure the offered services from server, available drivers for query execution,
+  query output options, enabling metrics from server and etc. The configuration parameters and
+  their detailed description and default values are available {{{./config.html} here}}.
+  The overridden configuration can be part of lens-site.xml.
+
+* Driver configuration
+
+  The supported drivers are configured through type and classname in this release. The property 
+  lens.server.drivers in server configuration specifies the driver types supported by the system and 
+  their corresponding driver implementation.
+
+  System can have multiple drivers of same type, for example MySQL and Postgres can be two drivers of
+  type JDBC. The configuration for each driver is specified in its site.xml file which should be 
+  present under the folder <Server_Conf_location>/drivers/<driver-type>/<driver-name>. 
+  For example, Hive driver's configuration should be specified in 
+  <LensServer_Install_Location>/conf/drivers/hive/hive1/hivedriver-site.xml where hive1 is the driver name.
+  A driver is identified by its fully qualified name which includes the driver type and driver name. For the
+  example discussed above the fully qualified name would be "hive/hive1"
+  
+  The organization of drivers in the system is illustrated below 
+
++---+
+
+  ├── conf
+      └── drivers
+          ├── hive
+          │   ├── hive1
+          │   │   └── hivedriver-site.xml
+          │   └── hive2
+          │       └── hivedriver-site.xml
+          └── jdbc
+              ├── jdbc1
+              │   └── jdbcdriver-site.xml
+              └── jdbc2
+                  └── jdbcdriver-site.xml
+
++---+
+
+  Supported drivers in this version are 
+  org.apache.lens.driver.hive.HiveDriver, org.apache.lens.driver.jdbc.JDBCDriver
+  and org.apache.lens.driver.es.ESDriver.
+  The configuration parameters and their description are explained in their respective docs listed below
+  HiveDriver - {{{./hivedriver-config.html} here}}
+  JDBCDriver - {{{./jdbcdriver-config.html} here}}
+  ESDriver - {{{./esdriver-config.html} here}}.
+  For overridding configurations, use the appropriate site.xml as listed below
+  hive - hivedriver-site.xml
+  jdbc - jdbc-driver-site.xml
+  es - esdriver-site.xml
+
+* Session configuration
+
+  The configuration that user can override for each session is documented {{{./session-config.html} here}}.
+  These configuration mostly include query parameters, which can be overriden by query as well.
+  Server should be configured with appropriate values for them in the site file.
+  The overridden configuration can be part of lens-site.xml.
